@@ -506,5 +506,25 @@ public class LauncherActivity extends BaseActivity {
         mSettingsButton = findViewById(R.id.setting_button);
         mAccountSpinner = findViewById(R.id.account_spinner);
         mProgressLayout = findViewById(R.id.progress_layout);
+    }private void applyCraftPixelFont(View view) {
+    if (mCraftPixelTypeface == null) {
+        mCraftPixelTypeface = ResourcesCompat.getFont(
+                this,
+                R.font.craft_pixel
+        );
+    }
+
+    if (mCraftPixelTypeface == null) return;
+
+    if (view instanceof TextView) {
+        ((TextView) view).setTypeface(mCraftPixelTypeface);
+    }
+
+    if (view instanceof ViewGroup) {
+        ViewGroup group = (ViewGroup) view;
+
+        for (int i = 0; i < group.getChildCount(); i++) {
+            applyCraftPixelFont(group.getChildAt(i));
+        }
     }
 }
