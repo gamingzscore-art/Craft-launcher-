@@ -1,5 +1,8 @@
 package net.kdt.pojavlaunch;
-
+import android.graphics.Typeface;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import androidx.core.content.res.ResourcesCompat;
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 import static net.kdt.pojavlaunch.Tools.getMods;
 import static net.kdt.pojavlaunch.Tools.hasMods;
