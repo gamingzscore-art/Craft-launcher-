@@ -138,13 +138,28 @@ public class LauncherActivity extends BaseActivity {
     private NotificationManager mNotificationManager;
     private Typeface mCraftPixelTypeface;
     /* Allows to switch from one button "type" to another */
-    private final FragmentManager.FragmentLifecycleCallbacks mFragmentCallbackListener = new FragmentManager.FragmentLifecycleCallbacks() {
-        @Override
-        public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
-            mSettingsButton.setImageDrawable(ContextCompat.getDrawable(getBaseContext(), f instanceof MainMenuFragment
-                    ? R.drawable.ic_menu_settings : R.drawable.ic_menu_home));
+    private final FragmentManager.FragmentLifecycleCallbacks mFragmentCallbackListener =
+        new FragmentManager.FragmentLifecycleCallbacks() {
+
+    @Override
+    public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+
+        if (f.getView() != null) {
+            applyCraftPixelFont(f.getView());
         }
-    };
+
+        if (mSettingsButton != null) {
+            mSettingsButton.setImageDrawable(
+                    ContextCompat.getDrawable(
+                            getBaseContext(),
+                            f instanceof MainMenuFragment
+                                    ? R.drawable.ic_menu_settings
+                                    : R.drawable.ic_menu_home
+                    )
+            );
+        }
+    }
+};
 
     /* Listener for the back button in settings */
     private final ExtraListener<String> mBackPreferenceListener = (key, value) -> {
