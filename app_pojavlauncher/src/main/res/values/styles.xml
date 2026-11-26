@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Light or not? -->
@@ -10,7 +11,7 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 
         <item name="android:textSize">@dimen/_12ssp</item>
-
+        <item name="android:fontFamily">@font/craft_pixel</item>
     </style>
 
     <style name="LauncherFragment_Divider">
@@ -35,6 +36,7 @@
     </style>
 
     <item name="dimension_tracker" type="id" />
+
     <style name="DimensionTracker">
         <item name="android:id">@id/dimension_tracker</item>
         <item name="android:layout_width">match_parent</item>
