@@ -33,7 +33,8 @@
         <item>@string/control_viewout</item>
         <item>@string/control_customkey</item>
         <item>@string/quick_setting_title</item>
-        <item>@string/mcl_option_customcontrol</item>
+        <item>@string/mcl_option_customcontrol</item> 
+        <item>@string/craft_recorder_test_capture</item>
     </string-array>
     
     <string-array name="renderer_values">
