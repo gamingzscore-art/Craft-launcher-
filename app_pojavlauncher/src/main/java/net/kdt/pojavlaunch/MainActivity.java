@@ -257,22 +257,52 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, 1f);
             windowHeight = Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, 1f);
 
+gameActionClickListener = (parent, view, position, id) -> {
+    switch(position) {
+        case 0:
+            dialogForceClose(MainActivity.this);
+            break;
+        case 1:
+            openLogOutput();
+            break;
+        case 2:
+            dialogSendCustomKey();
+            break;
+        case 3:
+            openQuickSettings();
+            break;
+        case 4:
+            openCustomControls();
+            break;
+        case 5:
+            CraftRecorderFrameCapture.capture(
+                    minecraftGLView.getRenderView(),
+                    new CraftRecorderFrameCapture.Callback() {
+                        @Override
+                        public void onFrameCaptured(android.graphics.Bitmap bitmap) {
+                            bitmap.recycle();
+                            runOnUiThread(() -> Toast.makeText(
+                                    MainActivity.this,
+                                    "Gameplay frame captured!",
+                                    Toast.LENGTH_SHORT
+                            ).show());
+                        }
 
-            // Menu
-            gameActionArrayAdapter = new ArrayAdapter<>(this,
-                    android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.menu_ingame));
-            gameActionClickListener = (parent, view, position, id) -> {
-                switch(position) {
-                    case 0: dialogForceClose(MainActivity.this); break;
-                    case 1: openLogOutput(); break;
-                    case 2: dialogSendCustomKey(); break;
-                    case 3: openQuickSettings(); break;
-                    case 4: openCustomControls(); break;
-                }
-                drawerLayout.closeDrawers();
-            };
-            navDrawer.setAdapter(gameActionArrayAdapter);
-            navDrawer.setOnItemClickListener(gameActionClickListener);
+                        @Override
+                        public void onCaptureFailed(String reason) {
+                            runOnUiThread(() -> Toast.makeText(
+                                    MainActivity.this,
+                                    reason,
+                                    Toast.LENGTH_LONG
+                            ).show());
+                        }
+                    }
+            );
+            break;
+    }
+    drawerLayout.closeDrawers();
+};
+
             drawerLayout.closeDrawers();
 
             final String finalVersion = version;
